@@ -30,16 +30,6 @@ jar {
 	}
 }
 
-ext {
-	setAsProvidedInPom = { group, name ->
-		modifyPom {
-			project {
-				dependencies.findAll { it.groupId == group && it.artifactId == name }*.scope = 'provided'
-			}
-		}
-	}
-}
-
 modifyPom {
 	project {
 		name 'gaelyk-remote'
@@ -70,7 +60,5 @@ modifyPom {
 		}
 	}
 	dependencies.removeAll(dependencies.findAll { it.scope == 'test' })
+	dependencies.findAll { it.groupId == 'org.gaelyk' && it.artifactId == 'gaelyk' }*.scope = 'provided'
 }
-
-setAsProvidedInPom('org.gaelyk', 'gaelyk')
-setAsProvidedInPom('org.gaelyk', 'gaelyk')
