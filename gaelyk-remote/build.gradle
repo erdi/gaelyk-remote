@@ -1,5 +1,76 @@
+apply plugin: 'nexus'
+
+group = 'org.gaelyk'
+version = '0.1'
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.1'
+	}
+}
+
 dependencies {
 	compile 'org.codehaus.groovy.modules.remote:remote-transport-http:0.4-SNAPSHOT',
-		"org.gaelyk:gaelyk:$gaelykVersion", "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion"
+		"org.gaelyk:gaelyk:$gaelykVersion"
 	testCompile 'httpunit:httpunit:1.6'
 }
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Gradle compatible version of groovy-remote',
+				'Implementation-Version': version,
+				'Built-By': System.getProperty('user.name'),
+				'Built-Date': new Date(),
+				'Built-JDK': System.getProperty('java.version'),
+				'Built-Gradle': gradle.gradleVersion
+	}
+}
+
+ext {
+	setAsProvidedInPom = { group, name ->
+		modifyPom {
+			project {
+				dependencies.findAll { it.groupId == group && it.artifactId == name }*.scope = 'provided'
+			}
+		}
+	}
+}
+
+modifyPom {
+	project {
+		name 'gaelyk-remote'
+		description 'Gradle compatible version of groovy-remote'
+		url 'https://github.com/erdi/gaelyk-remote'
+		inceptionYear '2012'
+
+		scm {
+			url 'https://github.com/erdi/gaelyk-remote'
+			connection 'scm:git://github.com/erdi/gaelyk-remote.git'
+			developerConnection 'scm:git@github.com:erdi/gaelyk-remote.git'
+		}
+
+		licenses {
+			license {
+				name 'The Apache Software License, Version 2.0'
+				url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+				distribution 'repo'
+			}
+		}
+
+		developers {
+			developer {
+				id 'erdi'
+				name 'Marcin Erdmann'
+				email 'marcin.erdmann@proxerd.pl'
+			}
+		}
+	}
+	dependencies.removeAll(dependencies.findAll { it.scope == 'test' })
+}
+
+setAsProvidedInPom('org.gaelyk', 'gaelyk')
+setAsProvidedInPom('org.gaelyk', 'gaelyk')
