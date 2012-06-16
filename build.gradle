@@ -1,0 +1,45 @@
+apply plugin: 'idea'
+apply from: "gradle/idea.gradle"
+
+task wrapper(type: Wrapper) {
+	gradleVersion = "1.0"
+}
+
+subprojects {
+	apply plugin: "groovy"
+	apply plugin: "idea"
+
+	ext {
+		groovyVersion = '1.8.6'
+		gaeVersion = '1.6.6'
+		gaelykVersion = '1.2'
+	}
+
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+
+	dependencies {
+		groovy "org.codehaus.groovy:groovy-all:$groovyVersion"
+		testCompile 'org.spockframework:spock-core:0.6-groovy-1.8', {
+			exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+		}
+	}
+}
+
+idea.project {
+	jdkName = '1.6'
+
+	ipr.withXml { provider ->
+		def node = provider.asNode()
+
+		// Use GIT
+		def vcsConfig = node.component.find { it.'@name' == 'VcsDirectoryMappings' }
+		vcsConfig.mapping[0].'@vcs' = 'Git'
+
+		// Set Gradle home
+		def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
+		gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir])
+	}
+}

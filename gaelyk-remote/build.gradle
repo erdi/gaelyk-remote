@@ -1,0 +1,5 @@
+dependencies {
+	compile 'org.codehaus.groovy.modules.remote:remote-transport-http:0.4-SNAPSHOT',
+		"org.gaelyk:gaelyk:$gaelykVersion", "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion"
+	testCompile 'httpunit:httpunit:1.6'
+}

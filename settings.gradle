@@ -1,0 +1,2 @@
+include 'gaelyk-remote', 'test-project'
+rootProject.name = 'gaelyk-remote-all'
