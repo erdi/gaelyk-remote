@@ -38,4 +38,16 @@ Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/r
 	
 ## Gaelyk specific variables in remote context
 
-To make it easier to setup your application for your tests closures passing through `groovyx.gaelyk.remote.RemoteControlServlet` get all the GAE-specific variables from [this list](http://gaelyk.appspot.com/tutorial/views-and-controllers#lazy) bound into their context. Thanks to that you can use the same property names to access the variables that are also available in your Gaelyk views and controllers. The only non GAE-specific variable added to the context of the remotely executed closures is `context` which points to the `ServletContext` instance for the application.
+To make it easier to setup your application for your tests closures passing through `groovyx.gaelyk.remote.RemoteControlServlet` get all the GAE-specific variables from [this list](http://gaelyk.appspot.com/tutorial/views-and-controllers#lazy) bound into their context. Thanks to that you can use the same property names to access the variables that are also available in your Gaelyk views and controllers. The only non GAE-specific variable added to the context of the remotely executed closures is `context` which points to the `ServletContext` instance for the application. The following example shows how easy it is to clear the datastore after each fixture in a specification thanks to the availability of `datastore` variable in the remote closure context.
+
+	import groovyx.remote.client.RemoteControl
+	import groovyx.remote.transport.http.HttpTransport
+	import spock.lang.Specification
+
+	class RemoteControlSpec extends Specification {
+		@Shared def remote = new RemoteControl(new HttpTransport("http://localhost:8080/remote-control"))
+
+		def cleanup() {
+			remote.exec { datastore.iterate { select keys }.each { it.key.delete() } }
+		}
+	}
