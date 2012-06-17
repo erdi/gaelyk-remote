@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.proxerd.gaelyk.remote
+package groovyx.gaelyk.remote
 
 import static com.google.appengine.api.utils.SystemProperty.Environment.Value.*
 import static java.net.HttpURLConnection.*

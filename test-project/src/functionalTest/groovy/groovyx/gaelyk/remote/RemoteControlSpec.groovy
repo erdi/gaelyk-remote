@@ -1,3 +1,5 @@
+package groovyx.gaelyk.remote
+
 import groovyx.gaelyk.GaelykBindingEnhancer
 import groovyx.remote.client.RemoteControl
 import groovyx.remote.client.RemoteException

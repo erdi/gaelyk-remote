@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package pl.proxerd.gaelyk.remote
+package groovyx.gaelyk.remote
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import com.google.appengine.api.utils.SystemProperty
-import com.google.appengine.api.datastore.DatastoreServiceFactory
+
 import groovyx.gaelyk.GaelykBindingEnhancer
 
 class RemoteControlServlet extends groovyx.remote.transport.http.RemoteControlServlet {

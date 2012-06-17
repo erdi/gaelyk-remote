@@ -14,31 +14,18 @@
  * limitations under the License.
  */
 
-package pl.proxerd.gaelyk.remote
+package groovyx.gaelyk.remote
 
+import groovyx.remote.CommandChain
 import groovyx.remote.Command
-import groovyx.remote.Result
-import groovyx.gaelyk.GaelykCategory
 
-class CommandInvoker extends groovyx.remote.server.CommandInvoker {
-
-	final ClassLoader parentLoader
-	final groovyx.remote.Command command
-	final Class rootClass
-	final List supportClasses
-
-	CommandInvoker(ClassLoader parentLoader, Command command) {
-		super(parentLoader, command)
+class CommandChainInvoker extends groovyx.remote.server.CommandChainInvoker {
+	CommandChainInvoker(ClassLoader parentLoader, CommandChain commandChain) {
+		super(parentLoader, commandChain)
 	}
 
 	@Override
-	protected Result resultForThrown(Throwable thrown) {
-		Result.forThrown(thrown)
-	}
-
-	protected invoke(instance, arg = null) {
-		use(GaelykCategory) {
-			super.invoke(instance, arg)
-		}
+	protected createInvoker(ClassLoader loader, Command command) {
+		return new CommandInvoker(loader, command)
 	}
 }

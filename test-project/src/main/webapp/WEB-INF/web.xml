@@ -31,7 +31,7 @@
 
 	<servlet>
         <servlet-name>RemoteControlServlet</servlet-name>
-        <servlet-class>pl.proxerd.gaelyk.remote.RemoteControlServlet</servlet-class>
+        <servlet-class>groovyx.gaelyk.remote.RemoteControlServlet</servlet-class>
     </servlet>
 
     <filter>

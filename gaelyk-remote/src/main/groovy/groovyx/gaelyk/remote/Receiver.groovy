@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.proxerd.gaelyk.remote
+package groovyx.gaelyk.remote
 
 import groovyx.remote.CommandChain
 
