@@ -5,6 +5,7 @@ import groovyx.remote.client.RemoteControl
 import groovyx.remote.client.RemoteException
 import groovyx.remote.transport.http.HttpTransport
 import spock.lang.Specification
+import javax.servlet.ServletContext
 
 class RemoteControlSpec extends Specification {
 
@@ -42,5 +43,10 @@ class RemoteControlSpec extends Specification {
 
 		expect:
 		remote(checkContextVariables).every { key, value -> value }
+	}
+
+	void "Servlet context is available in the remote context"() {
+		expect:
+		remote { context.getClass().name } == ServletContext.name
 	}
 }
