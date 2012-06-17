@@ -1,0 +1,3 @@
+# gaelyk-remote
+
+This project is a [Gaelyk](http://gaelyk.org)-compatible version of [groovy-remote](http://http://groovy.codehaus.org/modules/remote/). It's main usage is to setup a Gaelyk application for functional tests by allowing to execute closures defined in tests on the server. See [groovy-remote](http://http://groovy.codehaus.org/modules/remote/) project pages for genral usage and example not specific to Gaelyk.
