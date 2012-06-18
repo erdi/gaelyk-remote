@@ -18,7 +18,7 @@ The library provides a servlet that should be used as the endpoint for sending t
     
 ## Usage
 
-Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/remote-control` and you run your development server on port `8080` for functional tests the following specification should pass:
+Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/remote-control` and you run your development server runs on port `8080` for functional tests the following specification should pass:
 
 	import groovyx.remote.client.RemoteControl
 	import groovyx.remote.transport.http.HttpTransport
@@ -38,7 +38,9 @@ Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/r
 	
 ## Gaelyk specific variables in remote context
 
-To make it easier to setup your application for your tests closures passing through `groovyx.gaelyk.remote.RemoteControlServlet` get all the GAE-specific variables from [this list](http://gaelyk.appspot.com/tutorial/views-and-controllers#lazy) bound into their context. Thanks to that you can use the same property names to access the variables that are also available in your Gaelyk views and controllers. The only non GAE-specific variable added to the context of the remotely executed closures is `context` which points to the `ServletContext` instance for the application. The following example shows how easy it is to clear the datastore after each fixture in a specification thanks to the availability of `datastore` variable in the remote closure context.
+To make it easier to setup your application for your tests closures passing through `groovyx.gaelyk.remote.RemoteControlServlet` get all the GAE-specific variables from [this list](http://gaelyk.appspot.com/tutorial/views-and-controllers#lazy) bound into their context. Thanks to that you can use the same property names to access the variables that are also available in your Gaelyk views and controllers. The only non GAE-specific variable added to the context of the remotely executed closures is `context` which points to the `ServletContext` instance for the application. 
+
+The following example shows how easy it is to clear the datastore after each fixture in a specification thanks to the availability of `datastore` variable in the remote closure context.
 
 	import groovyx.remote.client.RemoteControl
 	import groovyx.remote.transport.http.HttpTransport
@@ -51,3 +53,7 @@ To make it easier to setup your application for your tests closures passing thro
 			remote.exec { datastore.iterate { select keys }.each { it.key.delete() } }
 		}
 	}
+	
+## Security
+
+A posibility to run arbitrary code on server is an obvious security risk. The library is aimed at being used during functional testing and that's why `groovyx.gaelyk.remote.RemoteControlServlet` checks if the application is running in development enviroment (`SystemProperty.environment.value() == SystemProperty.Environment.Value.Development`) and if that isn't the case always returns HTPP `404` error code and the remote closure is not executed.
