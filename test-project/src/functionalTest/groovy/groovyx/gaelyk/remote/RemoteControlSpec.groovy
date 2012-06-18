@@ -47,6 +47,6 @@ class RemoteControlSpec extends Specification {
 
 	void "Servlet context is available in the remote context"() {
 		expect:
-		remote { context.getClass().name } == ServletContext.name
+		remote { context in ServletContext }
 	}
 }

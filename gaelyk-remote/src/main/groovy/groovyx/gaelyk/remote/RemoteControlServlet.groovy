@@ -21,8 +21,13 @@ import javax.servlet.http.HttpServletResponse
 import com.google.appengine.api.utils.SystemProperty
 
 import groovyx.gaelyk.GaelykBindingEnhancer
+import javax.servlet.ServletConfig
+import javax.servlet.ServletContext
 
 class RemoteControlServlet extends groovyx.remote.transport.http.RemoteControlServlet {
+
+	private ServletContext context
+
 	@Override
 	protected boolean validateRequest(HttpServletRequest request, HttpServletResponse response) {
 		boolean valid = super.validateRequest(request, response)
@@ -37,6 +42,12 @@ class RemoteControlServlet extends groovyx.remote.transport.http.RemoteControlSe
 	protected groovyx.remote.server.Receiver createReceiver() {
 		def binding = new Binding()
 		GaelykBindingEnhancer.bind(binding)
-		new Receiver(binding.variables)
+		new Receiver([context: context] + binding.variables)
+	}
+
+	@Override
+	void init(ServletConfig config) {
+		context = config.servletContext
+		super.init(config)
 	}
 }
