@@ -18,7 +18,7 @@ The library provides a servlet that should be used as the endpoint for sending t
     
 ## Usage
 
-Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/remote-control` and you run your development server runs on port `8080` for functional tests the following specification should pass:
+Given that you've registered `groovyx.gaelyk.remote.RemoteControlServlet` at `/remote-control` and you run your development server on port `8080` for functional tests the following specification should pass:
 
 	import groovyx.remote.client.RemoteControl
 	import groovyx.remote.transport.http.HttpTransport
