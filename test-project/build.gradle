@@ -1,5 +1,4 @@
 apply plugin: 'gaelyk'
-apply plugin: 'gae-geb'
 
 
 ext {
@@ -15,7 +14,6 @@ buildscript {
 
 	dependencies {
 		classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.4'
-		classpath 'org.gradle.api.plugins:gradle-gae-geb-plugin:0.1'
 	}
 }
 
