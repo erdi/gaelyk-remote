@@ -16,8 +16,6 @@
 
 package groovyx.gaelyk.remote
 
-import static com.google.appengine.api.utils.SystemProperty.Environment.Value.*
-import static java.net.HttpURLConnection.*
 import com.google.appengine.api.utils.SystemProperty
 import com.meterware.httpunit.PostMethodWebRequest
 import com.meterware.servletunit.ServletRunner
@@ -26,6 +24,8 @@ import groovyx.remote.server.Receiver
 import groovyx.remote.transport.http.ContentType
 import spock.lang.Specification
 import spock.lang.Unroll
+import static com.google.appengine.api.utils.SystemProperty.Environment.Value.*
+import static java.net.HttpURLConnection.*
 
 class RemoteControlServletSpec extends Specification {
 	@Unroll('Returns #responseCode when running in #environment environment')
@@ -53,6 +53,7 @@ class TestRemoteControlServlet extends RemoteControlServlet {
 	@Override
 	protected Receiver createReceiver() {
 		new Receiver() {
+			@Override
 			void execute(InputStream command, OutputStream result) {
 			}
 		}

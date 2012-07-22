@@ -19,12 +19,15 @@ class RemoteControlSpec extends Specification {
 	}
 
 	void "remote exceptions are handled without errors"() {
+		given:
+		def message = 'test message'
+
 		when:
-		remote { throw new Exception('test message') }
+		remote { throw new Exception(message) }
 
 		then:
 		def remoteException = thrown(RemoteException)
-		remoteException.cause.message == 'test message'
+		remoteException.cause.message == message
 	}
 
 	void "all gaelyk services and variables are available in the remote context"() {
@@ -45,7 +48,7 @@ class RemoteControlSpec extends Specification {
 		remote(checkContextVariables).every { key, value -> value }
 	}
 
-	void "Servlet context is available in the remote context"() {
+	void "servlet context is available in the remote context"() {
 		expect:
 		remote { context in ServletContext }
 	}

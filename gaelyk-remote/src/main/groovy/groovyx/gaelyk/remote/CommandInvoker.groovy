@@ -16,14 +16,14 @@
 
 package groovyx.gaelyk.remote
 
+import groovyx.gaelyk.GaelykCategory
 import groovyx.remote.Command
 import groovyx.remote.Result
-import groovyx.gaelyk.GaelykCategory
 
 class CommandInvoker extends groovyx.remote.server.CommandInvoker {
 
 	final ClassLoader parentLoader
-	final groovyx.remote.Command command
+	final Command command
 	final Class rootClass
 	final List supportClasses
 

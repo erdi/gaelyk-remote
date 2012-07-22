@@ -26,6 +26,6 @@ class CommandChainInvoker extends groovyx.remote.server.CommandChainInvoker {
 
 	@Override
 	protected createInvoker(ClassLoader loader, Command command) {
-		return new CommandInvoker(loader, command)
+		new CommandInvoker(loader, command)
 	}
 }
