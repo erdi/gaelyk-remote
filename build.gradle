@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply from: "gradle/idea.gradle"
 
 task wrapper(type: Wrapper) {
-	gradleVersion = "1.0"
+	gradleVersion = "1.1"
 }
 
 subprojects {
