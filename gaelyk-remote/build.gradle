@@ -14,7 +14,7 @@ buildscript {
 }
 
 dependencies {
-	compile 'org.codehaus.groovy.modules.remote:remote-transport-http:0.4-SNAPSHOT',
+	compile 'org.codehaus.groovy.modules.remote:remote-transport-http:0.5',
 		"org.gaelyk:gaelyk:$gaelykVersion"
 	testCompile 'httpunit:httpunit:1.6'
 }
@@ -33,7 +33,7 @@ jar {
 modifyPom {
 	project {
 		name 'gaelyk-remote'
-		description 'Gradle compatible version of groovy-remote'
+		description 'Gaelyk compatible version of groovy-remote'
 		url 'https://github.com/erdi/gaelyk-remote'
 		inceptionYear '2012'
 
