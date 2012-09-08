@@ -1,20 +1,30 @@
-# gaelyk-remote
+# Gaelyk Remote Control
 
-This project is a [Gaelyk](http://gaelyk.org)-compatible version of [groovy-remote](http://http://groovy.codehaus.org/modules/remote/). It's main usage is to setup a Gaelyk application for functional tests by allowing to execute closures defined in tests on the server. See [groovy-remote](http://http://groovy.codehaus.org/modules/remote/) project pages for genral usage and examples not specific to Gaelyk.
+This project is a [Gaelyk](http://gaelyk.org)-compatible version of [Groovy Remote Control](http://http://groovy.codehaus.org/modules/remote/). It's main usage is to setup a Gaelyk application for functional tests by allowing to execute closures defined in tests on the server. See [groovy-remote](http://http://groovy.codehaus.org/modules/remote/) project pages for general usage and examples not specific to Gaelyk.
 
 ## Setup
+
+To use the library in your Gaelyk project you first need to add the dependency in your Gradle build file:
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		runtime "org.gaelyk:gaelyk-remote:0.1"
+	}
 
 The library provides a servlet that should be used as the endpoint for sending the code to be executed. All you need to do is to register this servlet in `web.xml` file of your project typically at the `/remote-control` path:
 
 	<servlet>
-        <servlet-name>RemoteControlServlet</servlet-name>
-        <servlet-class>groovyx.gaelyk.remote.RemoteControlServlet</servlet-class>
-    </servlet>
+		<servlet-name>RemoteControlServlet</servlet-name>
+		<servlet-class>groovyx.gaelyk.remote.RemoteControlServlet</servlet-class>
+		</servlet>
     
-    <servlet-mapping>
-        <servlet-name>RemoteControlServlet</servlet-name>
-        <url-pattern>/remote-control</url-pattern>
-    </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RemoteControlServlet</servlet-name>
+		<url-pattern>/remote-control</url-pattern>
+	</servlet-mapping>
     
 ## Usage
 
