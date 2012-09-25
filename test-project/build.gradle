@@ -23,3 +23,13 @@ dependencies {
 
 	gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
+
+task createGroovletsDir {
+	def groovletsDir = new File(webAppDir, 'WEB-INF/groovy')
+	outputs.file(groovletsDir)
+	doFirst {
+		groovletsDir.mkdirs()
+	}
+}
+
+gaelykPrecompileGroovlet.dependsOn createGroovletsDir
