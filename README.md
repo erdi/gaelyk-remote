@@ -1,4 +1,4 @@
-# Gaelyk Remote Control
+# Gaelyk Remote Control [![Build Status](https://buildhive.cloudbees.com/job/erdi/job/gaelyk-remote/badge/icon)](https://buildhive.cloudbees.com/job/erdi/job/gaelyk-remote/)
 
 This project is a [Gaelyk](http://gaelyk.org)-compatible version of [Groovy Remote Control](http://http://groovy.codehaus.org/modules/remote/). It's main usage is to setup a Gaelyk application for functional tests by allowing to execute closures defined in tests on the server. See [groovy-remote](http://http://groovy.codehaus.org/modules/remote/) project pages for general usage and examples not specific to Gaelyk.
 
